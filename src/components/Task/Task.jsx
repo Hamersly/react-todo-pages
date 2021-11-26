@@ -6,13 +6,12 @@ export const Task = ({ task, removeTodo, todoCompleted }) => {
         <TaaskBlock>
             <p>{task.date}</p>
             <TaskWrapper onClick={() => todoCompleted(task.id)}>
-                {task.isCompleted ? (
+                {task.isCompleted ? 
                     <TaskText Completed={"text-decoration: line-through;"}>
                         {task.text}
                     </TaskText>
-                ) : (
-                    <TaskText>{task.text}</TaskText>
-                )}
+                 : <TaskText>{task.text}</TaskText>
+                }
             </TaskWrapper>
             <RemoveButton onClick={() => removeTodo(task.id)}>
                 Удалить задание
