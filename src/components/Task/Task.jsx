@@ -10,8 +10,7 @@ export const Task = ({ task, removeTodo, todoCompleted }) => {
                     <TaskText Completed={"text-decoration: line-through;"}>
                         {task.text}
                     </TaskText>
-                 : <TaskText>{task.text}</TaskText>
-                }
+                 : <TaskText>{task.text}</TaskText>}
             </TaskWrapper>
             <RemoveButton onClick={() => removeTodo(task.id)}>
                 Удалить задание
