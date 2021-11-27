@@ -10,10 +10,10 @@ export const InputBlock = styled.div`
 export const StyledInput = styled.input`
     width: 100%;
     padding: 10px 15px;
-    margin: 5px 0;
+    margin-top: 30px;
     border: 1px solid;
 `;
 
 export const AddButton = styled(MyButton)`
-    border-color: green;
+    margin: 30px auto 0 auto;
 `;

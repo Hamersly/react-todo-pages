@@ -5,6 +5,7 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #696969;
 }
 
 code {
@@ -21,6 +22,7 @@ code {
 #root {
     display: flex;
     justify-content: center;
+
 }
 .App {
     width: 800px;

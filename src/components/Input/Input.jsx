@@ -26,7 +26,7 @@ export const Input = ({ addTodo }) => {
                 onKeyDown={handleSubmit}
                 placeholder="Введи задачу"
             />
-            <AddButton onClick={addTodoInList}>Добавить задание</AddButton>
+            <AddButton onClick={addTodoInList}>Добавить</AddButton>
         </InputBlock>
     );
 };

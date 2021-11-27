@@ -13,35 +13,25 @@ export const List = () => {
     const [tasks, setTasks] = useState([]);
 
     const addTodo = (text) => {
-        const newTodo = {
+        const newTasks = {
             id: nanoid(),
             date: new Date().toLocaleString(),
             text,
             isCompleted: false,
         };
 
-        const arr = [...tasks, newTodo];
-        const newTasks = sortTodo(arr);
-
-        setTasks(newTasks);
+        setTasks(prev => [...prev, newTasks]);
     };
 
     const removeTodo = (id) => {
         setTasks(tasks.filter((task) => task.id !== id));
     };
 
-    const sortTodo = (arr, id) => {
-        if (id) {
-            const todoindex = arr.findIndex((task) => task.id === id);
-            arr[todoindex].isCompleted = !arr[todoindex].isCompleted;
-        }
-        return arr.sort((a, b) => a.isCompleted - b.isCompleted);
-    };
-
     const todoCompleted = (id) => {
         const arr = [...tasks];
-        const newTasks = sortTodo(arr, id);
-        setTasks(newTasks);
+        const todoindex = arr.findIndex((task) => task.id === id);
+        arr[todoindex].isCompleted = !arr[todoindex].isCompleted;
+        setTasks(arr);
     };
 
     return (
@@ -60,7 +50,7 @@ export const List = () => {
             <RemoveTasksBlock>
                 {tasks.length > 1 ? (
                     <RemoveTasksButton onClick={() => setTasks([])}>
-                        Удалить все задания
+                        Удалить всё
                     </RemoveTasksButton>
                 ) : (
                     <div></div>
