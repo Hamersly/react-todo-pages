@@ -20,7 +20,7 @@ export const List = () => {
             isCompleted: false,
         };
 
-        setTasks(prev => [...prev, newTasks]);
+        setTasks([...tasks, newTasks]);
     };
 
     const removeTodo = (id) => {
@@ -28,10 +28,13 @@ export const List = () => {
     };
 
     const todoCompleted = (id) => {
-        const arr = [...tasks];
-        const todoindex = arr.findIndex((task) => task.id === id);
-        arr[todoindex].isCompleted = !arr[todoindex].isCompleted;
-        setTasks(arr);
+        setTasks([
+            ...tasks.map((task) =>
+                task.id === id
+                    ? { ...task, isCompleted: !task.isCompleted }
+                    : { ...task }
+            ),
+        ]);
     };
 
     return (

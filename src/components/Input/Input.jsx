@@ -12,7 +12,7 @@ export const Input = ({ addTodo }) => {
     };
 
     const handleSubmit = (e) => {
-        if (e.code === "Enter") {
+        if (e.key === "Enter") {
             addTodoInList();
         }
     };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TaskWrapper = styled.div`
     display: flex;
     padding: 15px;
-    margin: 5px 0;
+    // margin: 5px 0;
     justify-content: space-between;
     align-items: center;
 `;
@@ -34,13 +34,13 @@ export const RemoveButton = styled.button`
     background-color: orange;
     border: none;   
     padding: 10px;
-    margin: 15px 15px;
+    margin: 15px 15px 0 0;
     border-radius: 0%;
     box-shadow: 0 0 10px 3px black;
+    border-radius: 50px
 `;
 
 export const TaskText = styled.h3`
     ${(props) => props.Completed};
-    word-break: break-all;
-    color: 
+    word-break: break-word;
 `;

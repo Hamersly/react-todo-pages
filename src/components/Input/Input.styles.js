@@ -11,7 +11,8 @@ export const StyledInput = styled.input`
     width: 100%;
     padding: 10px 15px;
     margin-top: 30px;
-    border: 1px solid;
+    border-radius: 30px;
+    box-shadow: 0 0 10px 5px black;
 `;
 
 export const AddButton = styled(MyButton)`
