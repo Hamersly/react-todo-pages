@@ -15,18 +15,16 @@ import {
 export const Task = ({
     task,
     removeTodo,
-    todoCompleted,
-    ChangeTodoText,
-    OnChangeTodo,
+    ChangeValueTodo
 }) => {
     const [value, setValue] = useState(task.text);
 
     const changeTodo = () => {
         if (value.trim().length !== 0) {
-            ChangeTodoText(task.id, value.trim());
+            ChangeValueTodo(task.id, 'change', value.trim());
             setValue("");
         }
-    };
+    };  
 
     return (
         <TaskBlock>
@@ -35,13 +33,13 @@ export const Task = ({
                 <div>
                     {task.change ? (
                         <ChangeButton
-                            onClick={() => OnChangeTodo(task.id)}
+                            onClick={() => ChangeValueTodo(task.id, 'change')}
                             Color={"background-color: red;"}
                         >
                             ред.
                         </ChangeButton>
                     ) : (
-                        <ChangeButton onClick={() => OnChangeTodo(task.id)}>
+                        <ChangeButton onClick={() => ChangeValueTodo(task.id, 'change')}>
                             ред.
                         </ChangeButton>
                     )}
@@ -59,12 +57,12 @@ export const Task = ({
                         onChange={(e) => setValue(e.target.value)}
                         type="text"
                         wrap="hard"
-                        rows="5"
+                        rows="3"
                     ></ChangeText>
                     <SaveButton onClick={changeTodo}>Сохранить</SaveButton>
                 </TaskChanger>
             ) : (
-                <TaskWrapper onClick={() => todoCompleted(task.id)}>
+                <TaskWrapper onClick={() => ChangeValueTodo(task.id, 'isCompleted')}>
                     {task.isCompleted ? (
                         <TaskText Completed={"text-decoration: line-through;"}>
                             {task.text}

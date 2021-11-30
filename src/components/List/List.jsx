@@ -41,28 +41,14 @@ export const List = () => {
         setTasks(tasks.filter((task) => task.id !== id));
     };
 
-    const todoCompleted = (id) => {
+    const ChangeValueTodo = (id, value, text) => {
         setTasks([
             ...tasks.map((task) =>
-                task.id === id
-                    ? { ...task, isCompleted: !task.isCompleted }
+                task.id === id && text
+                    ? { ...task, [value]: !task[value], text: text }
+                    : task.id === id
+                    ? { ...task, [value]: !task[value] }
                     : { ...task }
-            ),
-        ]);
-    };
-
-    const OnChangeTodo = (id) => {
-        setTasks([
-            ...tasks.map((task) =>
-                task.id === id ? { ...task, change: !task.change } : { ...task }
-            ),
-        ]);
-    };
-
-    const ChangeTodoText = (id, text) => {
-        setTasks([
-            ...tasks.map((task) =>
-                task.id === id ? { ...task, text: text, change: !task.change} : { ...task }
             ),
         ]);
     };
@@ -75,9 +61,7 @@ export const List = () => {
                     <Task
                         removeTodo={removeTodo}
                         task={item}
-                        todoCompleted={todoCompleted}
-                        ChangeTodoText={ChangeTodoText}
-                        OnChangeTodo={OnChangeTodo}
+                        ChangeValueTodo={ChangeValueTodo}
                         key={item.id}
                     />
                 ))}
