@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { nanoid } from "nanoid";
+import React, { useState, useEffect } from "react";
 import {
     ListWrapper,
     TasksList,
@@ -10,17 +9,32 @@ import { Input } from "../Input/Input";
 import { Task } from "../Task/Task";
 
 export const List = () => {
-    const [tasks, setTasks] = useState([]);
+    useEffect(() => {
+        localStorage.clear();
+        localStorage.setItem("TodoList", JSON.stringify(tasks));
+    });
+
+    const loadingFromLocalStorage = () => {
+        const localTodo = JSON.parse(localStorage.getItem("TodoList"));
+        if (localTodo === null) {
+            return [];
+        } else {
+            return localTodo;
+        }
+    };
+
+    const [tasks, setTasks] = useState(loadingFromLocalStorage());
 
     const addTodo = (text) => {
-        const newTasks = {
-            id: nanoid(),
+        const newTask = {
+            id: new Date().getTime(),
             date: new Date().toLocaleString(),
             text,
             isCompleted: false,
+            change: false,
         };
 
-        setTasks([...tasks, newTasks]);
+        setTasks([...tasks, newTask]);
     };
 
     const removeTodo = (id) => {
@@ -37,6 +51,22 @@ export const List = () => {
         ]);
     };
 
+    const OnChangeTodo = (id) => {
+        setTasks([
+            ...tasks.map((task) =>
+                task.id === id ? { ...task, change: !task.change } : { ...task }
+            ),
+        ]);
+    };
+
+    const ChangeTodoText = (id, text) => {
+        setTasks([
+            ...tasks.map((task) =>
+                task.id === id ? { ...task, text: text, change: !task.change} : { ...task }
+            ),
+        ]);
+    };
+
     return (
         <ListWrapper>
             <Input addTodo={addTodo} />
@@ -46,6 +76,8 @@ export const List = () => {
                         removeTodo={removeTodo}
                         task={item}
                         todoCompleted={todoCompleted}
+                        ChangeTodoText={ChangeTodoText}
+                        OnChangeTodo={OnChangeTodo}
                         key={item.id}
                     />
                 ))}

@@ -13,6 +13,7 @@ export const StyledInput = styled.input`
     margin-top: 30px;
     border-radius: 30px;
     box-shadow: 0 0 10px 5px black;
+    outline:none;
 `;
 
 export const AddButton = styled(MyButton)`

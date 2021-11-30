@@ -9,6 +9,7 @@ export const MyButton = styled.button`
     background-color: orange;
     box-shadow: 0 0 10px 2px black;
     border: none;
+    border-radius: 50px;
 `;
 
 export const RemoveTasksButton = styled(MyButton)`

@@ -1,31 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     TaskWrapper,
     TaskText,
-    TaaskBlock,
+    TaskBlock,
+    TaskChanger,
     DateBlock,
     RemoveButton,
-    Date
+    ChangeButton,
+    SaveButton,
+    Date,
+    ChangeText,
 } from "./Task.styles";
 
-export const Task = ({ task, removeTodo, todoCompleted }) => {
+export const Task = ({
+    task,
+    removeTodo,
+    todoCompleted,
+    ChangeTodoText,
+    OnChangeTodo,
+}) => {
+    const [value, setValue] = useState(task.text);
+
+    const changeTodo = () => {
+        if (value.trim().length !== 0) {
+            ChangeTodoText(task.id, value.trim());
+            setValue("");
+        }
+    };
+
     return (
-        <TaaskBlock>
+        <TaskBlock>
             <DateBlock>
                 <Date>{task.date}</Date>
-                <RemoveButton onClick={() => removeTodo(task.id)}>
-                удалить
-            </RemoveButton>
+                <div>
+                    {task.change ? (
+                        <ChangeButton
+                            onClick={() => OnChangeTodo(task.id)}
+                            Color={"background-color: red;"}
+                        >
+                            ред.
+                        </ChangeButton>
+                    ) : (
+                        <ChangeButton onClick={() => OnChangeTodo(task.id)}>
+                            ред.
+                        </ChangeButton>
+                    )}
+
+                    <RemoveButton onClick={() => removeTodo(task.id)}>
+                        x
+                    </RemoveButton>
+                </div>
             </DateBlock>
-            <TaskWrapper onClick={() => todoCompleted(task.id)}>
-                {task.isCompleted ? 
-                    <TaskText Completed={"text-decoration: line-through;"}>
-                        {task.text}
-                    </TaskText>
-                 : <TaskText>{task.text}</TaskText>
-                }
-            </TaskWrapper>
-            
-        </TaaskBlock>
+
+            {task.change ? (
+                <TaskChanger>
+                    <ChangeText
+                        defaultValue={task.text}
+                        onChange={(e) => setValue(e.target.value)}
+                        type="text"
+                        wrap="hard"
+                        rows="5"
+                    ></ChangeText>
+                    <SaveButton onClick={changeTodo}>Сохранить</SaveButton>
+                </TaskChanger>
+            ) : (
+                <TaskWrapper onClick={() => todoCompleted(task.id)}>
+                    {task.isCompleted ? (
+                        <TaskText Completed={"text-decoration: line-through;"}>
+                            {task.text}
+                        </TaskText>
+                    ) : (
+                        <TaskText>{task.text}</TaskText>
+                    )}
+                </TaskWrapper>
+            )}
+        </TaskBlock>
     );
 };
